@@ -1,0 +1,14 @@
+# Build
+src/stl_tool
+tests/test_runner
+*.o
+*.obj
+
+# Generated output (optional: remove these lines to commit sample outputs)
+output/*.stl
+
+# Local / draft (not for repo yet)
+docs/GAP_ANALYSIS.md
+
+# OS
+.DS_Store

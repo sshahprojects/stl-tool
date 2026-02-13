@@ -1,0 +1,9 @@
+solid unit
+  facet normal 0.57735 0.57735 0.57735
+    outer loop
+      vertex 1 0 0
+      vertex 0 1 0
+      vertex 0 0 1
+    endloop
+  endfacet
+endsolid unit
