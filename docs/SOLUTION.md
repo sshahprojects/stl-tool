@@ -5,7 +5,7 @@
 Given a closed triangle mesh in STL format (e.g. a cold plate or mechanical part), we want to:
 
 1. **Identify the fluid cavity** — the interior volume where coolant or fluid would sit.
-2. **Produce a watertight mesh of that cavity** — a closed surface suitable for volume computation and downstream simulation or analysis.
+2. **Produce a watertight surface of that cavity** — a closed surface suitable for volume computation and downstream meshing simulation or analysis.
 3. **Retain the full solid mesh** for reference.
 
 The tool reads one input STL and writes two outputs: the full mesh as `solid_volume.stl` and the closed fluid cavity as `fluid_volume.stl`, both in the project’s `output/` directory.
@@ -23,7 +23,7 @@ The pipeline has four main stages:
 3. **Capping** — Find boundary edges of this subset (edges belonging to exactly one triangle). Trace boundary loops and close each loop with a fan of triangles from the loop’s centroid. Cap normals are oriented outward so the combined mesh is consistently oriented and watertight.
 4. **Clean and write** — Remove duplicate triangles, merge duplicate vertex positions in the fluid mesh, drop degenerate triangles, then write the result as ASCII STL and run a watertightness check.
 
-Volume is computed via the signed-tetrahedron formula (sum over triangles of (1/6) · (origin, v0, v1, v2)); the final fluid volume is reported and can be checked against the written `fluid_volume.stl`.
+Volume is computed via the signed-tetrahedron formula (sum of (1/6) · (origin, v0, v1, v2)); the final fluid volume is reported and can be checked against the written `fluid_volume.stl`.
 
 ---
 
@@ -37,7 +37,6 @@ For each triangle \( T_i \):
 - Ray origin: \( O = C + \varepsilon n \) (small \( \varepsilon \), e.g. \( 10^{-4} \)), so the ray starts just outside the facet.
 - Ray direction: \( n \).
 - For every other triangle \( T_k \), compute ray–triangle intersection (Möller–Trumbore). Collect hit distances \( t > t_{\min} \) (e.g. \( t_{\min} = 10^{-2} \) to avoid self-intersection and grazing hits).
-- Sort hits by \( t \); merge hits closer than \( t_{\varepsilon} \) into one “distinct” hit.
 - If the number of distinct hits is *even*, \( T_i \) is interior (ray enters and exits the solid an equal number of times before escaping), so it is kept; otherwise it is discarded.
 
 This gives the set of triangles that form the boundary of the fluid cavity, with holes where the cavity is open (e.g. at the top or sides).
