@@ -6,6 +6,7 @@ tests/test_runner
 
 # Local / draft (not for repo yet)
 docs/GAP_ANALYSIS.md
+docs/ALGORITHM_REPORT.md
 
 # OS
 .DS_Store
