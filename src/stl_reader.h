@@ -38,7 +38,7 @@ public:
     /** Check if vertex order (v0,v1,v2) matches right-hand rule vs original facet normals. Call after removeDuplicateVertices(). */
     void checkRightHandWinding(std::ostream& out) const;
 
-    /** Write mesh as ASCII STL. Call after removeDuplicateVertices(). Returns false on write error. */
+    /** Write set of triangles as ASCII STL. Call after removeDuplicateVertices(). Returns false on write error. */
     bool writeAsciiStl(const std::string& path) const;
     /** Write only triangles whose indices are in onlyIndices (sorted, unique). */
     bool writeAsciiStl(const std::string& path, const std::vector<size_t>& onlyIndices) const;
@@ -46,7 +46,7 @@ public:
     /** Append cap triangles to close boundary loops of the given triangle subset. Fills outTriangles with original subset + caps. */
     void addCaps(const std::vector<size_t>& triangleIndices, std::vector<Triangle>& outTriangles) const;
 
-    /** Compute fluid mesh: even-hit interior selection, addCaps, flip cap normals, cleanMesh. Call after removeDuplicateVertices(). Fills outFluid. */
+    /** Compute fluid set of triangles: even-hit interior selection, addCaps, flip cap normals, cleanMesh. Call after removeDuplicateVertices(). Fills outFluid. */
     void computeFluidMesh(std::vector<Triangle>& outFluid, std::ostream& cleanMeshOut,
         float originOffset = 1e-4f, float tMin = 1e-2f, float tEps = 1e-4f) const;
 

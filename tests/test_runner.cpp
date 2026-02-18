@@ -121,7 +121,7 @@ static void test_full_pipeline() {
     std::vector<StlReader::Triangle> fluid;
     std::ostringstream discard;
     r.computeFluidMesh(fluid, discard);
-    assert(!fluid.empty() && "data mesh should yield fluid triangles");
+    assert(!fluid.empty() && "data should yield fluid triangles");
     const char* outPath = "test_pipeline_out.stl";
     assert(StlReader::writeAsciiStlFromTriangles(outPath, fluid) && "write pipeline output");
     double vol = 0.;
@@ -144,7 +144,7 @@ static void test_volume_from_file_missing() {
     assert(vol == -999. && "vol should be unchanged on failure");
 }
 
-// --- I/O: writeAsciiStl then read back (full-mesh write path)
+// --- I/O: writeAsciiStl then read back (full write path)
 static void test_write_ascii_stl_roundtrip() {
     StlReader r;
     assert(r.read(simple_stl()));

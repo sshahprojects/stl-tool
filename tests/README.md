@@ -19,7 +19,7 @@ There are **14 tests**. They run in a few milliseconds except the full-pipeline 
 
 - **Volume** — `volumeFromFile` on a small STL; expected volume 1/6 for a single tetrahedron.
 - **Read and dedup** — Read `simple.stl`, call `removeDuplicateVertices()`, check triangle count.
-- **cleanMesh** — Duplicate triangles are removed; degenerate triangles (repeated vertices) are removed.
+- **cleanMesh** — Cleans the set of triangles: duplicate triangles are removed; degenerate triangles (repeated vertices) are removed.
 - **Write/read roundtrip** — Write one triangle with `writeAsciiStlFromTriangles`, read back, check one triangle and volume in a reasonable range.
 - **Vec3** — `operator<` ordering for vertices.
 - **Ray–triangle** — `rayIntersect`: ray from below through centroid hits; ray pointing away misses.

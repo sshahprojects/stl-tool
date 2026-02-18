@@ -194,7 +194,7 @@ bool StlReader::writeAsciiStl(const std::string& path) const
     while (!name.empty() && (name.back() == '\0' || name.back() == ' '))
         name.pop_back();
     if (name.empty())
-        name = "mesh";
+        name = "triangles";
     f << "solid " << name << "\n";
     for (size_t i = 0; i < indexedTriangles_.size(); ++i)
         writeOneFacet(f, getTriangle(i));
@@ -442,7 +442,7 @@ void StlReader::cleanMesh(std::vector<Triangle>& triangles, std::ostream& out)
         triangles.push_back(t);
     }
 
-    out << "Clean mesh report:\n";
+    out << "Clean triangles report:\n";
     out << "  Duplicate triangles removed: " << dupTris << "\n";
     out << "  Vertices: " << totalVertexRefs << " refs -> " << verts.size() << " unique (merged " << (totalVertexRefs - verts.size()) << " duplicate positions)\n";
     out << "  Degenerate triangles removed: " << degenerate << "\n";
