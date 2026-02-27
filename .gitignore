@@ -4,6 +4,9 @@ tests/test_runner
 *.o
 *.obj
 
+# Generated output (not in repo)
+output/
+
 # Local / draft (not for repo yet)
 docs/GAP_ANALYSIS.md
 docs/ALGORITHM_REPORT.md
